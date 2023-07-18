@@ -106,7 +106,6 @@ wss.on("connection", function connection(ws) {
 app.post("/keywords", async (req, res) => {
   try {
     const { keywords } = req.body; // Extract the keywords from the request body
-    console.log(keywords);
     const response = await axios.post(
       "http://localhost:8000/similarity",
       {
@@ -118,8 +117,6 @@ app.post("/keywords", async (req, res) => {
         },
       }
     );
-
-    console.log(response.data); // Log the response data from the POST request
 
     res.status(200).json(response.data); // Send the response data to the frontend
   } catch (error) {
