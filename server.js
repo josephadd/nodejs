@@ -106,6 +106,7 @@ wss.on("connection", function connection(ws) {
 app.post("/keywords", async (req, res) => {
   try {
     const { keywords } = req.body; // Extract the keywords from the request body
+    console.log(keywords);
     const response = await axios.post(
       "http://localhost:8000/similarity",
       {
@@ -144,5 +145,8 @@ app.post("/", (req, res) => {
   `);
 });
 
-console.log("Listening at Port 4007");
-server.listen(4007);
+const PORT = process.env.PORT || 4000
+
+
+console.log("Listening at Port", PORT);
+server.listen(PORT);
