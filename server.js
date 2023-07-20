@@ -106,7 +106,6 @@ app.post("/", (req, res) => {
   res.set("Content-Type", "text/xml");
 
   // Extract the transcription text from the Twilio request
-  console.log(req);
 
   // You can process the transcription text here if needed
 
@@ -114,7 +113,7 @@ app.post("/", (req, res) => {
   res.send(`
     <Response>
       <Start>
-        <Stream url="wss://79d9-196-61-44-164.ngrok-free.app/"/>
+        <Stream url="ws://geohilfe.eu-central-1.elasticbeanstalk.com/"/>
       </Start>
       <Say>Emergency Fire and Rescue Services. Where exactly is the location of the emergency? </Say>
       <Pause length="30" />
