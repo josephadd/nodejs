@@ -9,7 +9,6 @@ const server = http.createServer(app);
 const ws = new WebSocket.Server({ server });
 const speech = require("@google-cloud/speech");
 require("dotenv").config();
-const Twilio = require("twilio");
 
 const client = new speech.SpeechClient({
   keyFilename: "../server/routes/geohilfev1-1b4d84da44a9.json",
