@@ -6,7 +6,7 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 const server = http.createServer(app);
-const ws = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({ server });
 const speech = require("@google-cloud/speech");
 require("dotenv").config();
 
@@ -28,12 +28,12 @@ const request = {
 };
 
 // Handle WebSocket Connection
-ws.on("connection", function connection(w) {
+wss.on("connection", function connection(ws) {
   console.log("New Connection Initiated");
 
   let recognizeStream = null;
 
-  w.on("message", function incoming(message) {
+  ws.on("message", function incoming(message) {
     const msg = JSON.parse(message);
     switch (msg.event) {
       case "connected":
@@ -46,7 +46,7 @@ ws.on("connection", function connection(w) {
             console.log("speech:", data.results[0].alternatives[0].transcript);
 
             // Emit the transcription data to the clients over WebSocket
-            ws.clients.forEach((client) => {
+            wss.clients.forEach((client) => {
               if (client.readyState === WebSocket.OPEN) {
                 client.send(
                   JSON.stringify({
