@@ -43,8 +43,10 @@ ws.on("connection", function connection(w) {
           .streamingRecognize(request)
           .on("error", console.error)
           .on("data", async (data) => {
+            console.log("speech:", data.results[0].alternatives[0].transcript)
             const caller = "Connected...";
             // Make a streaming request to the extraction endpoint
+
             const streamingReq = http.request(
               {
                 host: "localhost",
