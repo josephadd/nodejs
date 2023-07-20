@@ -1,4 +1,3 @@
-const WebSocket = require("ws");
 const express = require("express");
 const cors = require("cors");
 const http = require("http");
@@ -6,9 +5,11 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 const server = http.createServer(app);
-const ws = new WebSocket.Server({ server });
+const { Server } = require("socket.io");
+const io = new Server(server);
 const speech = require("@google-cloud/speech");
 require("dotenv").config();
+const axios = require("axios");
 
 const client = new speech.SpeechClient({
   keyFilename: "../server/routes/geohilfev1-1b4d84da44a9.json",
@@ -27,13 +28,13 @@ const request = {
   interimResults: true,
 };
 
-// Handle WebSocket Connection
-ws.on("connection", function connection(w) {
+// Handle Socket.IO Connection
+io.on("connection", (socket) => {
   console.log("New Connection Initiated");
 
   let recognizeStream = null;
 
-  w.on("message", function incoming(message) {
+  socket.on("message", async (message) => {
     const msg = JSON.parse(message);
     switch (msg.event) {
       case "connected":
@@ -43,46 +44,29 @@ ws.on("connection", function connection(w) {
           .streamingRecognize(request)
           .on("error", console.error)
           .on("data", async (data) => {
-            console.log("speech:", data.results[0].alternatives[0].transcript)
+            console.log("speech:", data.results[0].alternatives[0].transcript);
             const caller = "Connected...";
             // Make a streaming request to the extraction endpoint
 
-            const streamingReq = http.request(
-              {
-                host: "localhost",
-                port: 8000,
-                path: "/extract",
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
+            try {
+              const response = await axios.post(
+                "http://localhost:8000/similarity",
+                {
+                  keywords: data.results[0].alternatives[0].transcript,
                 },
-              },
-              (res) => {
-                res.on("data", (chunk) => {
-                  const response = JSON.parse(chunk.toString());
-                  console.log(response.keywords);
-                  ws.clients.forEach((client) => {
-                    if (client.readyState === WebSocket.OPEN) {
-                      client.send(
-                        JSON.stringify({
-                          event: "interim-transcription",
-                          keywords: response.keywords,
-                        })
-                      );
-                    }
-                  });
-                });
-              }
-            );
+                {
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
 
-            // Send the transcription data in the request body
-            streamingReq.write(
-              JSON.stringify({
-                text: data.results[0].alternatives[0].transcript,
-              })
-            );
-
-            streamingReq.end();
+              socket.emit("interim-transcription", {
+                keywords: response.data.keywords,
+              });
+            } catch (error) {
+              console.error(error);
+            }
           });
         break;
       case "start":
@@ -139,9 +123,9 @@ app.post("/", (req, res) => {
   // Respond with TwiML containing the next set of instructions
   res.send(`
     <Response>
-    <Start>
-    <Stream url="ws://3.76.53.11/"/>
-  </Start>
+      <Start>
+        <Stream url="ws://geohilfe.eu-central-1.elasticbeanstalk.com/"/>
+      </Start>
       <Say>Emergency Fire and Rescue Services. Where exactly is the location of the emergency? </Say>
       <Pause length="30" />
     </Response>
@@ -150,11 +134,11 @@ app.post("/", (req, res) => {
 
 // Handle HTTP Request
 app.get("/", async (req, res) => {
-  res.send("Hello Geohilfe YYY")
+  res.send("Hello Geohilfe YYY");
   res.sendStatus(200);
 });
 
-const PORT = process.env.PORT || 4007;
+const PORT = process.env.PORT || 4000;
 
 console.log("Listening at Port", PORT);
 server.listen(PORT);
