@@ -140,7 +140,7 @@ app.post("/", (req, res) => {
   res.send(`
     <Response>
     <Start>
-    <Stream url="ws://${req.headers.host}"/>
+    <Stream url="ws://3.76.53.11/"/>
   </Start>
       <Say>Emergency Fire and Rescue Services. Where exactly is the location of the emergency? </Say>
       <Pause length="30" />
