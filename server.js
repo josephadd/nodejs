@@ -1,3 +1,4 @@
+const WebSocket = require("ws");
 const express = require("express");
 const cors = require("cors");
 const http = require("http");
@@ -5,11 +6,10 @@ const app = express();
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json());
 const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
+const ws = new WebSocket.Server({ server });
 const speech = require("@google-cloud/speech");
 require("dotenv").config();
-const axios = require("axios");
+const Twilio = require("twilio");
 
 const client = new speech.SpeechClient({
   keyFilename: "../server/routes/geohilfev1-1b4d84da44a9.json",
@@ -28,13 +28,13 @@ const request = {
   interimResults: true,
 };
 
-// Handle Socket.IO Connection
-io.on("connection", (socket) => {
+// Handle WebSocket Connection
+ws.on("connection", function connection(w) {
   console.log("New Connection Initiated");
 
   let recognizeStream = null;
 
-  socket.on("message", async (message) => {
+  w.on("message", function incoming(message) {
     const msg = JSON.parse(message);
     switch (msg.event) {
       case "connected":
@@ -45,28 +45,18 @@ io.on("connection", (socket) => {
           .on("error", console.error)
           .on("data", async (data) => {
             console.log("speech:", data.results[0].alternatives[0].transcript);
-            const caller = "Connected...";
-            // Make a streaming request to the extraction endpoint
 
-            try {
-              const response = await axios.post(
-                "http://localhost:8000/similarity",
-                {
-                  keywords: data.results[0].alternatives[0].transcript,
-                },
-                {
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }
-              );
-
-              socket.emit("interim-transcription", {
-                keywords: response.data.keywords,
-              });
-            } catch (error) {
-              console.error(error);
-            }
+            // Emit the transcription data to the clients over WebSocket
+            ws.clients.forEach((client) => {
+              if (client.readyState === WebSocket.OPEN) {
+                client.send(
+                  JSON.stringify({
+                    event: "interim-transcription",
+                    keywords: data.results[0].alternatives[0].transcript,
+                  })
+                );
+              }
+            });
           });
         break;
       case "start":
@@ -117,6 +107,7 @@ app.post("/", (req, res) => {
   res.set("Content-Type", "text/xml");
 
   // Extract the transcription text from the Twilio request
+  console.log(req);
 
   // You can process the transcription text here if needed
 
@@ -124,7 +115,7 @@ app.post("/", (req, res) => {
   res.send(`
     <Response>
       <Start>
-        <Stream url="ws://geohilfe.eu-central-1.elasticbeanstalk.com/"/>
+        <Stream url="wss://79d9-196-61-44-164.ngrok-free.app/"/>
       </Start>
       <Say>Emergency Fire and Rescue Services. Where exactly is the location of the emergency? </Say>
       <Pause length="30" />
