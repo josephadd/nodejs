@@ -12,7 +12,7 @@ require("dotenv").config();
 const path = require('path');
 
 const client = new speech.SpeechClient({
-  keyFilename: path.join(__dirname, '../server/routes/geohilfev1-1b4d84da44a9.json')
+  keyFilename: path.join(__dirname, 'routes/geohilfev1-1b4d84da44a9.json')
 });
 
 // Configure Transcription Request
@@ -107,7 +107,7 @@ app.post("/", (req, res) => {
   res.set("Content-Type", "text/xml");
 
   // Extract the transcription text from the Twilio request
-  console.log(req)
+  console.log("REQ", req)
 
   // You can process the transcription text here if needed
 
