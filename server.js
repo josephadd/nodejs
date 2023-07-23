@@ -113,7 +113,7 @@ app.post("/", (req, res) => {
   res.send(`
     <Response>
       <Start>
-        <Stream url="wss://geohilfe-api.com/"/>
+        <Stream url="wss://geohilfe-api.com"/>
       </Start>
       <Say>Emergency Fire and Rescue Services. Where exactly is the location of the emergency? </Say>
       <Pause length="30" />
@@ -123,7 +123,6 @@ app.post("/", (req, res) => {
 
 // Handle HTTP Request
 app.get("/", async (req, res) => {
-  res.send("Hello Geohilfe YYY");
   res.sendStatus(200);
 });
 
