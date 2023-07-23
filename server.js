@@ -18,8 +18,8 @@ const client = new speech.SpeechClient({
 // Configure Transcription Request
 const request = {
   config: {
-    encoding: "FLAC", // Use FLAC encoding
-    sampleRateHertz: 16000, // Set the sample rate for FLAC audio (usually 16000 or 44100)
+    encoding: "MULAW", // Use FLAC encoding
+    sampleRateHertz: 8000, // Set the sample rate for FLAC audio (usually 16000 or 44100)
     languageCode: "en-GB",
     enableAutomaticPunctuation: true,
     enableWordConfidence: true,
