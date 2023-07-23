@@ -9,9 +9,10 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 const speech = require("@google-cloud/speech");
 require("dotenv").config();
+const path = require('path');
 
 const client = new speech.SpeechClient({
-  keyFilename: "../server/routes/geohilfev1-1b4d84da44a9.json",
+  keyFilename: path.join(__dirname, '../server/routes/geohilfev1-1b4d84da44a9.json')
 });
 
 // Configure Transcription Request
@@ -106,6 +107,7 @@ app.post("/", (req, res) => {
   res.set("Content-Type", "text/xml");
 
   // Extract the transcription text from the Twilio request
+  console.log(req)
 
   // You can process the transcription text here if needed
 
