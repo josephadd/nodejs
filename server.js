@@ -18,14 +18,14 @@ const client = new speech.SpeechClient({
 // Configure Transcription Request
 const request = {
   config: {
-    encoding: "MULAW",
-    sampleRateHertz: 8000,
-    languageCode: "en-GB",
-    enableAutomaticPunctuation: true, // Enable automatic punctuation
-    enableWordConfidence: true, // Enable word-level confidence
-    enableWordTimeOffsets: true, // Enable word-level time offsets
+    encoding: "LINEAR16", // Highest quality encoding
+    sampleRateHertz: 16000, // Recommended sample rate for LINEAR16
+    languageCode: "en-US",
+    enableAutomaticPunctuation: true,
+    enableWordConfidence: true,
+    enableWordTimeOffsets: true,
   },
-  interimResults: true,
+  interimResults: true, // Enable interim results for real-time streaming
 };
 
 // Handle WebSocket Connection
@@ -107,7 +107,6 @@ app.post("/", (req, res) => {
   res.set("Content-Type", "text/xml");
 
   // Extract the transcription text from the Twilio request
-  console.log("REQ", req)
 
   // You can process the transcription text here if needed
 
