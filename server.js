@@ -18,14 +18,14 @@ const client = new speech.SpeechClient({
 // Configure Transcription Request
 const request = {
   config: {
-    encoding: "LINEAR16", // Highest quality encoding
-    sampleRateHertz: 16000, // Recommended sample rate for LINEAR16
-    languageCode: "en-US",
+    encoding: "FLAC", // Use FLAC encoding
+    sampleRateHertz: 16000, // Set the sample rate for FLAC audio (usually 16000 or 44100)
+    languageCode: "en-GB",
     enableAutomaticPunctuation: true,
     enableWordConfidence: true,
     enableWordTimeOffsets: true,
   },
-  interimResults: true, // Enable interim results for real-time streaming
+  interimResults: true,
 };
 
 // Handle WebSocket Connection
