@@ -113,7 +113,7 @@ app.post("/", (req, res) => {
   res.send(`
     <Response>
       <Start>
-        <Stream url="ws://geohilfe.eu-central-1.elasticbeanstalk.com/"/>
+        <Stream url="wss://geohilfe.us-east-1.elasticbeanstalk.com/"/>
       </Start>
       <Say>Emergency Fire and Rescue Services. Where exactly is the location of the emergency? </Say>
       <Pause length="30" />
