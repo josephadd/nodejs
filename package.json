@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "@aws-sdk/client-transcribe-streaming": "^3.352.0",
+    "@aws-sdk/util-stream": "^3.374.0",
     "@aws-sdk/util-utf8-node": "^3.259.0",
     "@google-cloud/speech": "^5.5.0",
     "aws-sdk": "^2.1397.0",
