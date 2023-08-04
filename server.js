@@ -121,7 +121,7 @@ app.post("/", (req, res) => {
   // Respond with TwiML containing the next set of instructions
   res.send(`
     <Response>
-      <Gather action="wss://geohilfe-api.com/" method="GET" input="speech dtmf" finishOnKey="#" timeout="3" numDigits="1">
+      <Gather action="wss://geohilfe-api.com/" method="POST" input="speech dtmf" finishOnKey="#" timeout="5" numDigits="1">
       <Say>Emergency Fire and Rescue Services. Where exactly is the location of the emergency? </Say>
       </Gather>
       <Start>
