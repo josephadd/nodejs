@@ -1,13 +1,13 @@
 {
   "type": "service_account",
-  "project_id": "geohilfev1",
-  "private_key_id": "1b4d84da44a907ef57b2a6d1476674f930837ab0",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDr1/dTQyH4iMg8\nmB8DZGcgUiuh6ADvI2LfUXJWDlle/a3Srp6/l3kimgDl3TPy9M74ke5oAf7wEOdS\nJ5uEomkuM4TKdKjPZWQIqwMLQe5RUpZX8/536A/uw8EowyiqxZaX3kz/VFK71h/L\nXkx5U7MR6dxu/Q98O7hjJM0JHMf4k56sL1aNstrrL2KxspD5Qm+LJOZFVVtcfkTe\n2GU+63cGjpYckwqi44DsxRdHKdaWgwsWEkAuUVQTH7kGdrQBQ13inmc3uB2ATfa3\nuFQ5tGbtIPFUh6Zi9MHC1AKVBSnDrri62oyIDYQi1DENDIQEO0tQVaPVmviS2TyR\njWQWU/75AgMBAAECggEAC8Vos8ArBuOU0uloytuNBiDzyo3w1f63JZxED6WBsmsI\n7PYIOFnQEvkKyG5E9IBhgCiQdKJ83fCKCyCs827DvymVHCG8dzWBS6l1am9s/KQZ\nmuQztDph6THeBzHOas+X15ah0zCbPILQbW8UdA3IZ0F73hJFXpcAefpRPX4xQOfM\nwGj0/w8wdBfdEdvJDG2y9XB0ZBmISB6LElBiglpbP3KiFYjl8IVrvoPbaRPqEOGU\n1y6n3rSRwHgTx+Y7LGGwCb6WWaNmV6aAxdVFLOpLISoIU0nVQ4rtP2/97T6a66rC\nW2J2za5Qh3/kPLqvA3Uf+pzlKcLScF1qxydQh06HfQKBgQD6NEEMHLzdRSaFyC3S\nK9SDEBWdrx67ycbOxYqrTf8SiJh5MuuDU+uzACWLDMimHqXfIwlLubPDqQP1rjko\n2Y1MTHuTPswrUDfDfVFfB9z8b0bfF6soRUfpXhNnjHVwmwWlUEbkhA/NCfNCadBS\nqZhoXAsJg++vRfY83zT2BvcIkwKBgQDxTo1eZa0qZKjmK0Vv+W7pLsx1s5F1GnB2\nHCnlPcno2dohmGsSbZ58JNj/wAdA11+AkhsboyXdCA7Ac2Wb2wYZdQ9VPvyyKhKR\nHjlUWT/k8C6iw+6HPkvQnfG6Ad4NWV2Mtqm2P4pWnOBToJSSi9prY1tybniiWX+X\ny9ojMQMNwwKBgQDH6LZMQi3YsWaNH5sUwPZj3ZcXzRLGQfq5vPYF1yTFHySMOdYY\nsRWyiJx2lDlBGV24glrsCS0LWOCUDKcY73HJE5bs2BDzTn2vkVJRlovHmfVLTLLx\nUyGY4RSp+HzhAsupARIThTzGu3uEhdzwHxdp0pjy+lqodUK/8itzo67/RwKBgAgm\n5TO5L55tBB+yeogL3ylVgWbAiDtyhzYWQXwTGE0bfvj/ky5uMZp0DDinnhccr4dC\naFQIsPDEourxew9G2O/nOntgw1ypezMX2Ev3L+dmDc1F3TsIabtEerQT+BJvYG+u\nhBE6GExQxGtO03YX72sNUjuNa9ngOCVCp73km/vNAoGAU+S5U5rGHYhNdT8sW2bn\nGslb6BzIhem/gzXYkooToPo7Wc/qq47GYk3q6BJ7WlVSQbzYQkqewvWvA4V4SK67\ndtF2W6chkjQ32qoTzeFcDlMDBFLUtlq6EtTxKE0jIFiHQ3NUBV49jFUw5fxHMfAb\nbUrTQR2lv7NSq90NPCkrNeo=\n-----END PRIVATE KEY-----\n",
-  "client_email": "geohilfe@geohilfev1.iam.gserviceaccount.com",
-  "client_id": "100416665045916169839",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/geohilfe%40geohilfev1.iam.gserviceaccount.com",
+  "project_id": "$PROJECT_ID",
+  "private_key_id": "$PRIVATE_KEY_ID",
+  "private_key": "$GOOGLE_CLOUD_SERVICE_KEY",
+  "client_email": "$CLIENT_EMAIL",
+  "client_id": "$CLIENT_ID",
+  "auth_uri": "$AUTH_URI",
+  "token_uri": "$TOKEN_URI",
+  "auth_provider_x509_cert_url": "$AUTH_PROVIDER",
+  "client_x509_cert_url": "$CLIENT_CERT_URL",
   "universe_domain": "googleapis.com"
 }
